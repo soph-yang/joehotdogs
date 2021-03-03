@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Joe's Hotdogs</title>
+    </head>
+    <body style="text-align: center">
+        <h1>Welcome to Joe's Hot Dogs!</h1>
+        <h2 style="text-decoration: underline;">Menu</h2>
+        <div style="font-size: 20px;">
+            Hot Dogs: $3.25 <br />
+            French Fries: $2.00 <br />
+            Soda: $1.50 <br /><br />
+        </div>
+        
+        <hr>
+        
+        <p style="font-size: 20px;">Your order is: </p>
+        
+        <script language="javascript">
+            const HOTDOG_PRICE = 3.25;
+            const FRY_PRICE = 2.00;
+            const SODA_PRICE = 1.50;
+            
+            num_hotdogs = prompt("Hello! How many hot dogs do you want?", "");
+            num_fries = prompt("How many fries do you want?", "");
+            num_sodas = prompt("How many sodas do you want?", "");
+            
+            subtotal = HOTDOG_PRICE * num_hotdogs + FRY_PRICE * num_fries
+                                                    + SODA_PRICE * num_sodas;
+            
+            document.write(num_hotdogs + " hot dogs <br/>" + num_fries 
+                            + " fries <br/>" + num_sodas + " sodas <br/>");
+            document.write("Subtotal: $" + subtotal.toFixed(2) + "<br/><br/>");
+            
+            if (subtotal > 20) 
+            {
+                subtotal = .9 * subtotal;
+                document.write("You apply for Joe's special! " + 
+                   "Your new subtotal is $" + subtotal.toFixed(2) + "<br/>");
+            }
+            
+            tax = .0625 * subtotal;            
+            total = subtotal + tax;
+            
+            document.write("Tax: $" + tax.toFixed(2) + "<br/>");
+            document.write("Total: $" + total.toFixed(2) + "<br/>");
+        </script>
+    </body>
+</html>
