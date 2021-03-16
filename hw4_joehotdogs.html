@@ -3,48 +3,120 @@
     <head>
         <meta charset="utf-8">
         <title>Joe's Hotdog Stand!</title>
+        <style>
+            #error {
+                color: red;
+                display: none;
+            }
+        </style>
+        
+        <script type="text/javascript">
+            function validate() {
+                err = false;
+                document.getElementById("error").style.display = "none";
+                let hotdog_index = document.getElementById("hotdog").selectedIndex;
+                let frenchfry_index = document.getElementById("frenchfry").selectedIndex;
+                let soda_index = document.getElementById("soda").selectedIndex;
+                
+                if ((hotdog_index == 0) && (frenchfry_index == 0) && (soda_index == 0)) {
+                    document.getElementById("error").style.display = "block";
+                    err = true;
+                }
+                
+                return !err;
+            }
+            
+            window.onload = function() {
+                document.getElementById("submitbtn").onclick = function() {
+                    const HOTDOG_PRICE = 3.25;
+                    const FRY_PRICE = 2.00;
+                    const SODA_PRICE = 1.50;
+                    
+                    let hotdog_index = document.getElementById("hotdog").selectedIndex;
+                    let frenchfry_index = document.getElementById("frenchfry").selectedIndex;
+                    let soda_index = document.getElementById("soda").selectedIndex;
+                    
+                    num_hotdogs = document.getElementById("hotdog").options[hotdog_index].value;
+                    num_fries = document.getElementById("hotdog").options[frenchfry_index].value;
+                    num_sodas = document.getElementById("hotdog").options[soda_index].value;
+                    
+                    subtotal = HOTDOG_PRICE * num_hotdogs + FRY_PRICE * num_fries
+                                                            + SODA_PRICE * num_sodas;
+
+                    if (subtotal > 20) 
+                    {
+                        subtotal = .9 * subtotal;
+                        alert("You apply for Joe's special! " + 
+                        "Your new subtotal is $" + subtotal.toFixed(2));
+                    }
+                    
+                    tax = .0625 * subtotal;            
+                    total = subtotal + tax;
+                    
+                    alert(num_hotdogs + " hot dogs, " + num_fries + 
+                    " fries, " + num_sodas + " sodas. " + 
+                    "Subtotal: $" + subtotal.toFixed(2) + 
+                    ". Tax: $" + tax.toFixed(2) + 
+                    ". Total: $" + total.toFixed(2));
+                }
+            }
+        </script>
+        
     </head>
     <body style="text-align: center">
         <h1>Welcome to Joe's Hot Dog Stand!!</h1>
         <h2 style="text-decoration: underline;">Our Menu</h2>
         <div style="font-size: 20px;">
-            Hot Dogs: $3.25 <br />
-            French Fries: $2.00 <br />
-            Soda: $1.50 <br /><br />
+            <form 	 	
+                name="data"
+                method="post"
+                onsubmit="return validate()" 
+            >
+                Amount of Hot Dogs ($3.25): 
+                <select id="hotdog">
+                    <option value="choose">--Choose an option--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                
+                <br />Amount of French Fries ($2.00):
+                <select id="frenchfry">
+                    <option value="choose">--Choose an option--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                
+                <br />Amount of Soda ($1.50):
+                <select id="soda">
+                  <option value="choose">--Choose an option--</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                </select>
+                
+                <div id="error">Please choose an option</div>
+                
+                <br /><input type="submit" id="submitbtn">
+            </form>
         </div>
         
         <hr>
-        
-        <p style="font-size: 20px;">Your order is: </p>
-        
-        <script language="javascript">
-            const HOTDOG_PRICE = 3.25;
-            const FRY_PRICE = 2.00;
-            const SODA_PRICE = 1.50;
-            
-            num_hotdogs = prompt("Hello! How many hot dogs do you want?", "");
-            num_fries = prompt("How many fries do you want?", "");
-            num_sodas = prompt("How many sodas do you want?", "");
-            
-            subtotal = HOTDOG_PRICE * num_hotdogs + FRY_PRICE * num_fries
-                                                    + SODA_PRICE * num_sodas;
-            
-            document.write(num_hotdogs + " hot dogs <br/>" + num_fries 
-                            + " fries <br/>" + num_sodas + " sodas <br/>");
-            document.write("Subtotal: $" + subtotal.toFixed(2) + "<br/><br/>");
-            
-            if (subtotal > 20) 
-            {
-                subtotal = .9 * subtotal;
-                document.write("You apply for Joe's special! " + 
-                   "Your new subtotal is $" + subtotal.toFixed(2) + "<br/>");
-            }
-            
-            tax = .0625 * subtotal;            
-            total = subtotal + tax;
-            
-            document.write("Tax: $" + tax.toFixed(2) + "<br/>");
-            document.write("Total: $" + total.toFixed(2) + "<br/>");
-        </script>
     </body>
 </html>
